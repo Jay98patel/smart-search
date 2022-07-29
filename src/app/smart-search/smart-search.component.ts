@@ -42,4 +42,8 @@ export class SmartSearchComponent {
     this.headerName = content
     this.website = url;
   }
+
+  expandQrCode(){
+    console.log("expand")
+  }
 }

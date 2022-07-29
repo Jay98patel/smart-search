@@ -1,12 +1,15 @@
-<div class="container d-flex justify-content-center h-100">
-    <div class="card mt-5 p-4">
+<div class="container d-flex flex-column justify-content-center h-100">
+    <div class="d-flex justify-content-center">
+        <h3 class="text-danger pe-2">SMART </h3> <h3>SEARCH</h3>
+    </div>
+    <div class="card p-4">
         <div class="input-group mb-3">
             <ng-template #rt let-r="result" let-t="term" let-i="index">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between" (mouseover)='expandQrCode()' (click)="j(r,'https://en.wikipedia.org/wiki/'+ r.replaceAll(' ', '_'))">
                     <ngb-highlight class="w-50 text-wrap" [result]="r" [term]="t" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasRight"
-                        (click)="j(r,'https://en.wikipedia.org/wiki/'+ r.replaceAll(' ', '_'))"></ngb-highlight>
-                    <ngx-qrcode class="" [elementType]="elementType" [errorCorrectionLevel]="correctionLevel"
+                        ></ngb-highlight>
+                    <ngx-qrcode  class="" [elementType]="elementType" [errorCorrectionLevel]="correctionLevel"
                         [value]="'https://en.wikipedia.org/wiki/'+ r.replaceAll(' ', '_')" alt="Demo QR Code"
                         cssClass="bshadow"></ngx-qrcode>
                 </div>
@@ -15,15 +18,27 @@
             <div class="offcanvas offcanvas-end w-75" tabindex="-1" id="offcanvasRight"
                 aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
-                    <h5 id="offcanvasRightLabel">{{headerName }}</h5>
+                    <h5 >Search For Result: {{headerName }}</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <div *ngIf="website" class="w-100 h-100">
-
-                        <iframe class="w-100 h-100" [src]="website | safeUrlIFrame" width="150" height="100"
+                    <div  class="w-100 h-100">
+                        <iframe *ngIf="website" class="w-100 h-100" [src]="website | safeUrlIFrame" width="150" height="100"
                             frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                            <svg *ngIf="!website" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                                <g transform="translate(50,50)"><circle cx="0" cy="0" r="8.333333333333334" fill="none" stroke="#e15b64" stroke-width="4" stroke-dasharray="26.179938779914945 26.179938779914945">
+                                <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="0" repeatCount="indefinite"></animateTransform>
+                                </circle><circle cx="0" cy="0" r="16.666666666666668" fill="none" stroke="#f47e60" stroke-width="4" stroke-dasharray="52.35987755982989 52.35987755982989">
+                                <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.2" repeatCount="indefinite"></animateTransform>
+                                </circle><circle cx="0" cy="0" r="25" fill="none" stroke="#f8b26a" stroke-width="4" stroke-dasharray="78.53981633974483 78.53981633974483">
+                                <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.4" repeatCount="indefinite"></animateTransform>
+                                </circle><circle cx="0" cy="0" r="33.333333333333336" fill="none" stroke="#abbd81" stroke-width="4" stroke-dasharray="104.71975511965978 104.71975511965978">
+                                <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.6" repeatCount="indefinite"></animateTransform>
+                                </circle><circle cx="0" cy="0" r="41.666666666666664" fill="none" stroke="#849b87" stroke-width="4" stroke-dasharray="130.89969389957471 130.89969389957471">
+                                <animateTransform attributeName="transform" type="rotate" values="0 0 0;360 0 0" times="0;1" dur="1s" calcMode="spline" keySplines="0.2 0 0.8 1" begin="-0.8" repeatCount="indefinite"></animateTransform>
+                                </circle></g>
+                                </svg>
                     </div>
                 </div>
             </div>
