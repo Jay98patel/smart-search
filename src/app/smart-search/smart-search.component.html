@@ -1,0 +1,37 @@
+<div class="container d-flex justify-content-center h-100">
+    <div class="card mt-5 p-4">
+        <div class="input-group mb-3">
+            <ng-template #rt let-r="result" let-t="term" let-i="index">
+                <div class="d-flex justify-content-between">
+                    <ngb-highlight class="w-50 text-wrap" [result]="r" [term]="t" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRight"
+                        (click)="j(r,'https://en.wikipedia.org/wiki/'+ r.replaceAll(' ', '_'))"></ngb-highlight>
+                    <ngx-qrcode class="" [elementType]="elementType" [errorCorrectionLevel]="correctionLevel"
+                        [value]="'https://en.wikipedia.org/wiki/'+ r.replaceAll(' ', '_')" alt="Demo QR Code"
+                        cssClass="bshadow"></ngx-qrcode>
+                </div>
+            </ng-template>
+            <!-- <input type="text" class="form-control"> -->
+            <div class="offcanvas offcanvas-end w-75" tabindex="-1" id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 id="offcanvasRightLabel">{{headerName }}</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div *ngIf="website" class="w-100 h-100">
+
+                        <iframe class="w-100 h-100" [src]="website | safeUrlIFrame" width="150" height="100"
+                            frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                    </div>
+                </div>
+            </div>
+            <input id="typeahead-http" type="text" class="form-control" [class.is-invalid]="searchFailed"
+                [(ngModel)]="model" [ngbTypeahead]="search" placeholder="Smart search" [resultTemplate]="rt" />
+            <span class="input-group-append"><button class="btn btn-primary"><i
+                        class="fas fa-search"></i></button></span>
+        </div>
+        <div *ngIf="searching" class="form-text text-muted">searching...</div>
+    </div>
+</div>
